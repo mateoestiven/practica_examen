@@ -12,6 +12,7 @@ const files = ref([
     { name: 'Galery', icon: '🖼' },
     {
         name: 'OneDrive-Personal', icon: '📁', hijo: [
+            
             {
                 name: 'Documents', icon: '📁', hijo: [
                     { name: 'Anvsoft', icon: '📁' },
@@ -53,6 +54,19 @@ function showInfoNieto(z) {
     }
 }
 
+function addFile(){
+    if (selectedIndexPadre.value !== -1) {
+        const newFile = {name:'Nuevo Archivo', icon:'📄'}
+        if(files.value[selectedIndexPadre.value].hijo){
+            files.value[selectedIndexPadre.value].hijo.push(newFile)
+        }else{
+            files.value[selectedIndexPadre.value].hijo = [newFile]
+        }
+    }else{
+        alert('No se encontro ruta')
+    }
+}
+
 
 </script>
 
@@ -86,12 +100,12 @@ function showInfoNieto(z) {
                     </div>
                 </div>
             </div>
-            <div class="w-2/4 bg-slate-600 text-center">
-                <div class="">
-
+            <div class="w-2/4 bg-slate-600 text-center grid grid-rows-2 justify-center items-center ">
+                <div class="bg-green-400 px-2 py-2 w-32 h-10 rounded-2xl cursor-pointer font-semibold mt-24">
+                    añadir carpeta
                 </div>
-                <div class="">
-                    
+                <div @click="addFile()" class="bg-blue-400 px-2 py-2 w-32 h-10 rounded-2xl cursor-pointer font-semibold mb-24">
+                    añadir archivo
                 </div>
             </div>
         </div>
